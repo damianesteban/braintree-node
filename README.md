@@ -19,7 +19,7 @@ var gateway = require('braintree-js')(config);
 gateway.createCustomer(...)
 ```
 
-3. Most methods take the same parameters as the current Node.js SDK methods, except for the callback. Instead, you can `.then` off of the gateway methods or `yield` them if you are using generators (or `await`, if you're transpiling ES7 down with babel).
+Most methods take the same parameters as the current Node.js SDK methods, except for the callback. Instead, you can `.then` off of the gateway methods or `yield` them if you are using generators (or `await`, if you're transpiling ES7 down with babel).
 
 Example:
 
@@ -33,5 +33,23 @@ gateway.createCustomer(customer)
     // handle rejection...
   })
 ```
-##Customers
+#API
+
+###Customers
+
+#.createCustomer(user)
+
+create a customer like so:
+
+```
+app.use('/createBraintreeUser', function(req, res) {
+  gateway.createCustomer(req.body)
+    .then(function(response) {
+      res.send({user: response.customer});
+    })
+    .catch(function(error) {
+      res.status(400).send({error: error});
+    });
+});
+```
 
