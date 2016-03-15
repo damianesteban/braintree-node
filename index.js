@@ -61,7 +61,7 @@ module.exports = function(config) {
       if (!transaction.amount) {
         return reject(new Error('Amount required to create transaction'));
       }
-      if (!transaction.paymentMethodNonce || !transaction.paymentMethodToken) {
+      if (!transaction.paymentMethodNonce && !transaction.paymentMethodToken) {
         return reject(new Error('Nonce or Token required to create transaction'));
       }
 
