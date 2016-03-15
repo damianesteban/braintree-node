@@ -169,7 +169,7 @@ module.exports = function(config) {
   gateway.findOneAndUpdate = function(id, update, upsert) {
     return new Promise((resolve, reject) => {
       this.customer.update(id, update, (error, result) => {
-        if (error.type === 'notFoundError' && upsert) {
+        if (error && error.type === 'notFoundError' && upsert) {
           update.id = id ? id : null;
           this.customer.create(update, (error, result) => {
             if (error) {
