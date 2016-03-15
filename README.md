@@ -35,9 +35,9 @@ gateway.createCustomer(customer)
 ```
 #API
 
-###Customers
+##Customers
 
-#.createCustomer(user)
+###.createCustomer(user)
 
 create a customer like so:
 
