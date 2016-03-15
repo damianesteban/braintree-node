@@ -53,8 +53,21 @@ app.post('/createBraintreeUser', function(req, res) {
 });
 ```
 
-###.findCustomer(id) - resolves with the customer object (unlike most other methods which resolve with the http response from braintree)
-You can find a braintree user:
+###.deleteCustomer(id)
+Deletes the braintree user with the given id.
+
+```
+app.del('/deleteBraintreeUser', function(req, res) {
+  var theID = req.body;
+  gateway.deleteCustomer(theID)
+    .then(response => {...})
+    .catch(error => {...});
+});
+```
+
+###.findCustomer(id)
+
+Finds the braintree user with the given id. Resolves with the customer object (unlike most other methods which resolve with the http response from braintree).
 
 ```
 app.get('/findBraintreeUser', function(req, res) {
