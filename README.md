@@ -39,17 +39,33 @@ gateway.createCustomer(customer)
 
 ###.createCustomer(user)
 
-create a customer like so:
+You can create a customer like so:
 
 ```
-app.use('/createBraintreeUser', function(req, res) {
+app.post('/createBraintreeUser', function(req, res) {
   gateway.createCustomer(req.body)
     .then(function(response) {
-      res.send({user: response.customer});
+      res.json({user: response.customer});
     })
     .catch(function(error) {
       res.status(400).send({error: error});
     });
 });
+```
+
+###.findCustomer(id) - resolves with the customer object (unlike most other methods which resolve with the http response from braintree)
+You can find a braintree user:
+
+```
+app.get('/findBraintreeUser', function(req, res) {
+  var theID = req.body;
+  gateway.findCustomer(theID)
+    .then(function(response) {
+      res.json({firstName: response.firstName});
+    })
+    .catch(function(error) {
+      res.status(400).json({error: error});
+    });
+})
 ```
 
