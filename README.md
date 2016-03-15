@@ -92,6 +92,18 @@ app.del('/deleteBraintreeUser', function(req, res) {
 });
 ```
 
+###.deleteMultipleCustomers(users)
+Deletes all braintree users in an array of users. Each object in the array only needs an `id` property so braintree can find the user to delete.
+
+```
+app.del('/deleteBraintreeUsers', function(req, res) {
+  var users = [{id: '123'}, {id: '456'}];
+  gateway.deleteMultipleCustomers(users)
+    .then(continueAfterAllDeleted)
+    .catch(handleFailure);
+});
+```
+
 ###.findCustomer(id)
 
 Finds the braintree user with the given id. Resolves with the customer object (unlike most other methods which resolve with the http response from braintree).
