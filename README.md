@@ -5,7 +5,7 @@
 1. Run the following:
 `npm install --save braintree-js`
 
-2. instantiate the gateway, passing in a configuration object. In lieu of `braintree.Environment.Production` or `braintree.Environment.Production`, just set the environment property on your configuration object to the string of the environment you want, like so:
+2. instantiate the gateway, passing in a configuration object. In lieu of `braintree.Environment.Sandbox` or `braintree.Environment.Production`, just set the environment property on your configuration object to the string of the environment you want, like so:
 
 ```
 var config = {
