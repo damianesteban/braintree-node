@@ -9,7 +9,7 @@
 
 ```
 var config = {
-  environment: 'Environment',
+  environment: 'Production',
   publicKey: yourPublicKey,
   privateKey: yourPrivateKey,
   merchantId: yourMerchantId
