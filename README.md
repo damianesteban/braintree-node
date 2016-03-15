@@ -35,8 +35,6 @@ gateway.createCustomer(customer)
 ```
 #API
 
-##Customers
-
 ###.createCustomer(user)
 
 You can create a customer like so:
@@ -66,6 +64,22 @@ app.post('/createManyBraintreeUsers', function(req, res) {
 });
 
 ```
+
+###.createTransaction(amount, nonce, options)
+
+Wrapper for `.transaction.sale`, rejects if amount or nonce is undefined. Any `options` passed in will be set on the `options` property of the object that `transaction.sale` takes in the SDK
+
+```
+app.post('/checkout', function(req, res) {
+  var amount = req.body.amount;
+  var nonce = req.body.nonce;
+  var options = req.body.paymentOptions;
+  gateway.createTransaction(amount, nonce, options)
+    .then(handleSuccessfulTransaction)
+    .catch(handleFailedTransaction);
+});
+```
+
 ###.deleteCustomer(id)
 Deletes the braintree user with the given id.
 
