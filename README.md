@@ -1,5 +1,7 @@
 #braintree-js - promisifies the braintree node.js SDK with extra helper utilities
 
+##Note: I am in no way affiliated with braintree and this is not the official braintree node.js SDK. If you are looking for the official SDK, visit this link : https://www.npmjs.com/package/braintree
+
 ##Setup
 
 1. Run the following:
