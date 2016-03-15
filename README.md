@@ -82,3 +82,40 @@ app.get('/findBraintreeUser', function(req, res) {
 })
 ```
 
+###.findOneAndUpdate(user, upsert)
+Takes a user object and updates it if it exists, and creates it if `upsert` is set to true
+
+app.put('/updateOrCreate', function(req, res) {
+  // assuming this user does not exist in braintree
+  var user = {id: '123', firstName: 'Bob'};
+  gateway.findOneAndUpdate(user, true)
+    .then(handleSuccess)
+    .then(handleRejection);
+  gateway.findCustomer(user.id); // => {id: '123', firstName: 'Bob'}
+});
+
+###.generateClientToken()
+
+Generates client token
+
+```
+app.get('/token', function(req, res) {
+  gateway.generateClientToken()
+    .then(response => res.json(response.clientToken))
+    .catch(error => res.json(error));
+});
+```
+
+###.updateCustomer(id, update)
+Updates braintree user with the given `id` and updates any properties on the `update` object
+
+```
+app.put('/me', function(req, res) {
+  var theId = req.user._id;
+  gateway.updateCustomer(theId, {firstName: 'prometheus'})
+    .then(response => {...})
+    .catch(error => {...});
+})
+```
+
+
