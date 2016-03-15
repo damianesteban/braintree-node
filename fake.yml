@@ -1,0 +1,33 @@
+nonces:
+  valid:
+    nonce: fake-valid-nonce
+    visa: fake-valid-visa-nonce
+    amex: fake-valid-amex-nonce
+    mastercard: fake-valid-mastercard-nonce
+    discover: fake-valid-discover-nonce
+    debit: fake-valid-debit-nonce
+  # for simulating successful card verification responses
+  processorRejected:
+    visa: fake-processor-declined-visa-nonce
+    mastercard: fake-processor-declined-mastercard-nonce
+    amex: fake-processor-declined-amex-nonce
+    discover: fake-processor-declined-discover-nonce
+  # for invalid values for nonce i.e. luhn-invalid or already consumed
+  invalid:
+    luhn: fake-luhn-invalid-nonce
+    consumed: fake-consumed-nonce
+    fraudulent: fake-gateway-rejected-fraud-nonce
+cardNumbers:
+  valid:
+    visa: 4111111111111111
+    amex: 378282246310005
+    discover: 6011111111111117
+    mastercard: 5555555555554444
+  # simulates unsuccessful card verification responses
+  invalid:
+    visa: 4000111111111115
+    mastercard: 5105105105105100
+    amex: 378734493671000
+    discover: 6011000990139424
+routingNumbers:
+  valid: 071101307

@@ -11,7 +11,7 @@
 7 verbose unsafe-perm in lifecycle true
 8 info braintree-js@1.0.0 Failed to exec test script
 9 verbose stack Error: braintree-js@1.0.0 test: `NODE_PATH=./ mocha test.js`
-9 verbose stack Exit status 1
+9 verbose stack Exit status 3
 9 verbose stack     at EventEmitter.<anonymous> (/home/roonie/.linuxbrew/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
 9 verbose stack     at emitTwo (events.js:87:13)
 9 verbose stack     at EventEmitter.emit (events.js:172:7)
@@ -28,7 +28,7 @@
 15 error npm  v2.7.6
 16 error code ELIFECYCLE
 17 error braintree-js@1.0.0 test: `NODE_PATH=./ mocha test.js`
-17 error Exit status 1
+17 error Exit status 3
 18 error Failed at the braintree-js@1.0.0 test script 'NODE_PATH=./ mocha test.js'.
 18 error This is most likely a problem with the braintree-js package,
 18 error not with npm itself.
