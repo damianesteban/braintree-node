@@ -53,6 +53,19 @@ app.post('/createBraintreeUser', function(req, res) {
 });
 ```
 
+###.createMultipleCustomers(users)
+
+Create multiple users
+
+```
+app.post('/createManyBraintreeUsers', function(req, res) {
+  var users = [{id: '123'}, {id: '456'}, {id: '789'}];
+  gateway.createMultipleCustomers(users)
+    .then(runsWhenAllAreCreated)
+    .catch(runsIfAnyOneCustomerFailed);
+});
+
+```
 ###.deleteCustomer(id)
 Deletes the braintree user with the given id.
 
