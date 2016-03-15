@@ -33,8 +33,8 @@ module.exports = function(config) {
   const gateway = braintree.connect(config);
 
   /**
-   * Generate a client token to be sent to client
-   * @return {Promise} with result of `gateway.clientToken.generate`
+   * @wraps gateway.clientToken.generate
+   * @return {Promise}
    */
   gateway.generateClientToken = function() {
     return new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ module.exports = function(config) {
   };
 
   /**
-   *  `gateway.transaction.sale`
+   * @wraps gateway.transaction.sale
    * @param {Number|String} amount, required
    * @param {String} nonce, required
    * @param {options} options, optional
@@ -79,7 +79,7 @@ module.exports = function(config) {
   };
 
   /**
-   * `gateway.customer.find`
+   * @wraps gateway.customer.find
    * @param {String} id, required
    * @return {Promise}
    */
@@ -99,7 +99,7 @@ module.exports = function(config) {
    };
 
   /**
-   * `gateway.customer.create`
+    * @wraps gateway.customer.create
     * @param {user} user object with various paramaters
     *   if no `id` property exists on user, default to braintree's
     *   randomly generated id
@@ -119,7 +119,7 @@ module.exports = function(config) {
   };
 
   /**
-   * `gateway.customer.update`
+   * @wraps gateway.customer.update
    * @param {String} id, required, braintree id of user
    * @param {update} update object
    * @return {Promise}
@@ -140,7 +140,7 @@ module.exports = function(config) {
   };
 
   /**
-   * `gateway.customer.delete`
+   * @wraps gateway.customer.delete
    * @param {String} id, braintree id of user to delete
    * @return {Promise}
    */

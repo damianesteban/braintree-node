@@ -79,7 +79,6 @@ describe('braintree wrapper', function() {
       var users = [{id: 'boogly1'}, {id: 'boogly2'}, {id: 'boogly3'}];
 
       const newUsers = yield gateway.createMultipleCustomers(users);
-      console.log(newUsers);
 
       yield gateway.deleteMultipleCustomers(users);
       done();
