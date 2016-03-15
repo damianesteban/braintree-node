@@ -50,26 +50,26 @@ module.exports = function(config) {
   /**
    * @wraps gateway.transaction.sale
    * @param {Number|String} amount, required
-   * @param {String} nonce, required
    * @param {options} options, optional
    */
 
-  gateway.createTransaction = function(amount, nonce, options) {
+  gateway.createTransaction = function(transaction, options) {
     return new Promise((resolve, reject) => {
-      if (!amount) {
+      if (!transaction) {
+        return reject(new Error('transaction object required'));
+      }
+      if (!transaction.amount) {
         return reject(new Error('Amount required to create transaction'));
       }
-      if (!nonce) {
-        return reject(new Error('Nonce required to create transaction'));
+      if (!transaction.paymentMethodNonce || !transaction.paymentMethodToken) {
+        return reject(new Error('Nonce or Token required to create transaction'));
       }
 
-      const params = {
-        amount: amount,
-        paymentMethodNonce: nonce,
-        options: options
-      };
+      if (options) {
+        transaction.options = options;
+      }
 
-      this.transaction.sale(params, function(error, result) {
+      this.transaction.sale(transaction, function(error, result) {
         if (error) {
           return reject(error);
         }

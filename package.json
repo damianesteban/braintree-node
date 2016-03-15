@@ -1,6 +1,6 @@
 {
   "name": "braintree-node",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A promise-focused wrapper around the Braintree node.js SDK",
   "main": "index.js",
   "scripts": {
