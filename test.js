@@ -65,10 +65,10 @@ describe('braintree wrapper', function() {
   it('can upsert a customer', function(done) {
     this.timeout(5000);
     co(function*() {
-      user.lastName = 'bob';
-      const response = yield gateway.findOneAndUpdate(user, true);
+      const update = {lastName: 'bob'};
+      const response = yield gateway.findOneAndUpdate('unique123', update, true);
       assert.ok(response.success);
-      assert.equal(response.customer.lastName, 'bob');
+      assert.equal(response.customer.lastName, update.lastName);
       done();
     }).catch(done);
   });

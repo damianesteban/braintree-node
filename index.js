@@ -161,15 +161,17 @@ module.exports = function(config) {
 
 
   /**
-   * @param {User} user object to update|create
+   * @param {String} id of user to update
+   * @param {Update} update user object to update|create - attaches id to user if not null
    * @param {Boolean} upsert, create new document if not found
    * @return {Promise}
    */
-  gateway.findOneAndUpdate = function(user, upsert) {
+  gateway.findOneAndUpdate = function(id, update, upsert) {
     return new Promise((resolve, reject) => {
-      this.customer.update(user.id, user, (error, result) => {
+      this.customer.update(id, update, (error, result) => {
         if (error.type === 'notFoundError' && upsert) {
-          this.customer.create(user, (error, result) => {
+          update.id = id ? id : null;
+          this.customer.create(update, (error, result) => {
             if (error) {
               return reject(error);
             }
