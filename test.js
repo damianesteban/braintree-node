@@ -29,7 +29,10 @@ describe('braintree wrapper', function() {
   }).catch(done));
 
   it('creates a sale', done => co(function*() {
-    const response = yield gateway.createTransaction(15, fakeData.nonces.valid.nonce);
+    const response = yield gateway.createTransaction({
+      amount: 15,
+      paymentMethodNonce: fakeData.nonces.valid.nonce
+    });
     assert.ok(response.success);
     assert.equal(response.transaction.amount, '15.00');
     done();
@@ -86,4 +89,21 @@ describe('braintree wrapper', function() {
     }).catch(done);
   });
 
+  it('can clone a transaction', function(done) {
+    this.timeout(5000);
+    co(function*() {
+      const response = yield gateway.createTransaction({
+        amount: 15,
+        paymentMethodNonce: fakeData.nonces.valid.nonce
+      });
+      assert.ok(response.success);
+      assert.equal(response.transaction.amount, '15.00');
+      const id = response.transaction.id;
+
+      const cloneResponse = yield gateway.cloneTransaction(id, 35);
+      assert.ok(cloneResponse.success);
+      assert.equal(cloneResponse.transaction.amount, '35.00');
+      done();
+    }).catch(done);
+  });
 });

@@ -49,7 +49,7 @@ module.exports = function(config) {
 
   /**
    * @wraps gateway.transaction.sale
-   * @param {Number|String} amount, required
+   * @param {Transaction} transaction, required, contains `amount` and `paymentMethodNonce` or `paymentMethodToken`
    * @param {options} options, optional
    */
 
@@ -75,6 +75,42 @@ module.exports = function(config) {
         }
         return resolve(result);
       });
+    });
+  };
+
+  /**
+   * @wraps gateway.transaction.cloneTransaction
+   * @param {String} transactionId
+   * @param {Number|String} amount
+   * @param {Boolean} submitForSettlement, defaults to true
+   * @return {Promise}
+   */
+
+  gateway.cloneTransaction = function(transactionId, amount, submitForSettlement) {
+    return new Promise((resolve, reject) => {
+      if (!transactionId) {
+        return reject (new Error('Transaction id is required to clone a transaction'));
+      }
+      if (!amount) {
+        return reject (new Error('Amount is required to clone transaction'));
+      }
+
+      submitForSettlement = submitForSettlement === false ?
+        false :
+        true;
+      const options = {
+        submitForSettlement: submitForSettlement
+      };
+
+      const params = {amount: amount, options: options};
+
+      this.transaction.cloneTransaction(transactionId, params, function(error, result) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(result);
+      });
+
     });
   };
 
