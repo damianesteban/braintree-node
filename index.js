@@ -266,6 +266,25 @@ module.exports = function(config) {
     });
   };
 
+  /**
+   * @param {String} token
+   * @return {Promise}
+   */
+
+  gateway.deletePaymentMethod = function(token) {
+    return new Promise((resolve, reject) => {
+      if (!token) {
+        return reject(new Error('Token is required to delete payment method'));
+      }
+
+      this.paymentMethod.delete(token, function(error, result) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(result);
+      });
+    });
+  }
   function handleEnv(environment) {
     return environment[0].toUpperCase() + environment.slice(1).toLowerCase();
   }
