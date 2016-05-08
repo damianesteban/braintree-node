@@ -34,11 +34,13 @@ module.exports = function(config) {
 
   /**
    * @wraps gateway.clientToken.generate
+   * @param customerId, optional
    * @return {Promise}
    */
-  gateway.generateClientToken = function() {
+
+  gateway.generateClientToken = function(customerId) {
     return new Promise((resolve, reject) => {
-      this.clientToken.generate({}, function(error, result) {
+      this.clientToken.generate({ customerId }, function(error, result) {
         if (error) {
           return reject(error);
         }
@@ -49,7 +51,8 @@ module.exports = function(config) {
 
   /**
    * @wraps gateway.transaction.sale
-   * @param {Transaction} transaction, required, contains `amount` and `paymentMethodNonce` or `paymentMethodToken`
+   * @param {Transaction} transaction, required, contains `amount`
+   * and `paymentMethodNonce` or `paymentMethodToken`
    * @param {options} options, optional
    */
 
@@ -69,7 +72,7 @@ module.exports = function(config) {
         transaction.options = options;
       }
 
-      this.transaction.sale(transaction, function(error, result) {
+      this.transaction.sale(transaction, (error, result) => {
         if (error) {
           return reject(error);
         }
@@ -110,7 +113,6 @@ module.exports = function(config) {
         }
         return resolve(result);
       });
-
     });
   };
 
@@ -120,7 +122,7 @@ module.exports = function(config) {
    * @return {Promise}
    */
 
-   gateway.findCustomer = function(id) {
+  gateway.findCustomer = function(id) {
     return new Promise((resolve, reject) => {
       if (!id) {
         return reject(new Error('id required to find customer'));
@@ -143,6 +145,7 @@ module.exports = function(config) {
     *   a `paymentMethodNonce` property on the user object with the client nonce
     * @return {Promise}
    */
+
   gateway.createCustomer = function(user) {
     return new Promise((resolve, reject) => {
       this.customer.create(user, function(error, result) {
@@ -174,6 +177,27 @@ module.exports = function(config) {
       });
     });
   };
+
+/**
+ * @wraps gateway.merchantAccount.update
+ * @param {String} id, required, braintree id of submerchant
+ * @param {update} update object
+ * @return {Promise}
+ */
+
+  gateway.updateSubmerchant = function(id, update) {
+    return new Promise((resolve, reject) => {
+      if (!id) {
+        return reject(new Error('id required to update submerchant'));
+      }
+      this.merchantAccount.update(id, update, function(error, result) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(result);
+      });
+    });
+  }
 
   /**
    * @wraps gateway.customer.delete
