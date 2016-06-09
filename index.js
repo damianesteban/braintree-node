@@ -136,6 +136,26 @@ module.exports = function(config) {
     });
    };
 
+   /**
+    * @wraps gateway.merchantAccount.find
+    * @param {String} id, required
+    * @return {Promise}
+    */
+
+  gateway.findSubmerchant = function(id) {
+    return new Promise((resolve, reject) => {
+      if (!id) {
+        return reject(new Error('id required to find customer'));
+      }
+      this.merchantAccount.find(id, function(error, result) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(result);
+      });
+    });
+  };
+
   /**
     * @wraps gateway.customer.create
     * @param {user} user object with various paramaters
