@@ -341,7 +341,7 @@ module.exports = function(config) {
         return reject(new Error('Token is required to add payment method'));
       }
 
-      this.paymentMethod.update(token, { options: { makeDefault: true } }, function(error, result) {
+      this.paymentMethod.update(token, options: { makeDefault: true }, function(error, result) {
         if (error) {
           return reject(error);
         }
@@ -361,7 +361,7 @@ module.exports = function(config) {
         return reject(new Error('Token is required to add payment method'));
       }
 
-      this.paymentMethod.create(token, { options: { makeDefault: true } }, function(error, result) {
+      this.paymentMethod.create(token, options: { makeDefault: true }, function(error, result) {
         if (error) {
           return reject(error);
         }
