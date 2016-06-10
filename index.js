@@ -329,9 +329,55 @@ module.exports = function(config) {
       });
     });
   }
+
+  /**
+   * @param {String} token
+   * @return {Promise}
+   */
+
+  gateway.updatePaymentMethod = function(token) {
+    return new Promise((resolve, reject) => {
+      if (!token) {
+        return reject(new Error('Token is required to add payment method'));
+      }
+
+      this.paymentMethod.update(token, { options: { makeDefault: true } }, function(error, result) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(result);
+      });
+    });
+  };
+
+  /**
+   * @param {String} token
+   * @return {Promise}
+   */
+
+  gateway.addPaymentMethod = function(token) {
+    return new Promise((resolve, reject) => {
+      if (!token) {
+        return reject(new Error('Token is required to add payment method'));
+      }
+
+      this.paymentMethod.create(token, { options: { makeDefault: true } }, function(error, result) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(result);
+      });
+    });
+  };
+
   function handleEnv(environment) {
     return environment[0].toUpperCase() + environment.slice(1).toLowerCase();
   }
 
   return gateway;
 };
+
+
+function handleEnv(environment) {
+  return environment[0].toUpperCase() + environment.slice(1).toLowerCase();
+}
