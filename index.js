@@ -144,9 +144,6 @@ module.exports = function(config) {
 
   gateway.findSubmerchant = function(id) {
     return new Promise((resolve, reject) => {
-      if (!id) {
-        return reject(new Error('id required to find customer'));
-      }
       this.merchantAccount.find(id, function(error, result) {
         if (error) {
           return reject(error);
